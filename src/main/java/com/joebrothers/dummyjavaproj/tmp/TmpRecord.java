@@ -1,4 +1,4 @@
-package com.joebrothers.jenkinstest.tmp;
+package com.joebrothers.dummyjavaproj.tmp;
 
 
 public class TmpRecord {

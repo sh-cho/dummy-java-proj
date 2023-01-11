@@ -7,3 +7,4 @@
 
 server:
   port: 51234
+  shutdown: graceful

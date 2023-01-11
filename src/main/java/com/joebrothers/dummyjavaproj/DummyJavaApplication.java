@@ -1,4 +1,4 @@
-package com.joebrothers.jenkinstest;
+package com.joebrothers.dummyjavaproj;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

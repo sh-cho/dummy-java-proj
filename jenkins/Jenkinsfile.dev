@@ -1,25 +1,26 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'gradle:7.6-jdk17-alpine'
+        }
+    }
 
     stages {
-        stage('Example Username/Password') {
-            environment {
-                SERVICE_CREDS = credentials('my-predefined-username-password')
-            }
+        stage('clone & build') {
             steps {
-                sh 'echo "Service user is $SERVICE_CREDS_USR"'
-                sh 'echo "Service password is $SERVICE_CREDS_PSW"'
-                sh 'curl -u $SERVICE_CREDS https://myservice.example.com'
+                checkout scmGit(
+                        branches: [[name: 'main']],
+                        userRemoteConfigs: [[url: 'https://github.com/sh-cho/dummy-java-proj.git']])
+                sh 'gradle bootJar'
+                stash includes: 'build/libs/**.jar', name: 'JAR'
             }
         }
-        stage('Example SSH Username with private key') {
-            environment {
-                SSH_CREDS = credentials('my-predefined-ssh-creds')
-            }
+
+        stage('deploy') {
+            agent none
             steps {
-                sh 'echo "SSH private key is located at $SSH_CREDS"'
-                sh 'echo "SSH user is $SSH_CREDS_USR"'
-                sh 'echo "SSH passphrase is $SSH_CREDS_PSW"'
+                unstash 'JAR'
+                sh 'script/startup.sh'
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.joebrothers.jenkinstest.tmp;
+package com.joebrothers.dummyjavaproj.tmp;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
