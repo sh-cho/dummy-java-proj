@@ -21,6 +21,8 @@ echo "> 새 어플리케이션 배포"
 
 echo "> Build 파일 복사"
 
+mkdir -p "$APP_HOME/jar/"
+
 cp "$APP_HOME"/build/libs/*.jar "$APP_HOME/jar/"
 
 #JAR_NAME=$(ls $REPOSITORY/jar/ | grep 'dummy-java-proj-0.0.1-SNAPSHOT.jar' | tail -n 1)
